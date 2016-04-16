@@ -50,6 +50,9 @@ def getFiles(root,path,to_download):
 		if len(node):
 			getFiles(node,path+"/"+node.get('Name'),to_download)
 
+def cleanName(str):
+	return ''.join([i if ord(i) < 128 else '_' for i in str])
+
 def getLatestVersion(root):
 	"""Check all versions for latest date"""
 	first_run = True
