@@ -26,6 +26,7 @@ def createRequest(url):
 
 def createFolders(root,path):
 	"""Run through XML nodes and copy folder structure into 'path' """
+	createFolder('',path)
 	for node in root:
 		if node.tag == "Folder":
 			createFolder(node.get('Name'),path)
