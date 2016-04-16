@@ -4,12 +4,12 @@ import urllib, urllib2, base64
 import xml.etree.ElementTree as ET
 
 def createRequest(url):
-	"""Easy way of creating requests"""	
+	"""Easy way of creating requests"""
 	dirname, filename = os.path.split(os.path.abspath(__file__))
 	with open(dirname+"/token.txt") as f:
 		data=f.readlines()
 	appName=data[0].strip()
-	appToken=data[1].strip()	
+	appToken=data[1].strip()
 	lmtdAccssFile = open(dirname+'/lmtdAccss.txt')
 	lines = lmtdAccssFile.readlines()
 	lmtdAccssFile.close()
@@ -42,7 +42,7 @@ def createFolder(name,path):
 
 def getFiles(root,path,to_download):
 	"""Fill list of all files you could possible download"""
-	for node in root:		
+	for node in root:
 		if node.tag == "File":
 			#print "Files found "+path+"/"+node.get('Name')
 			created = getLatestVersion(node)
@@ -58,9 +58,9 @@ def getLatestVersion(root):
 	first_run = True
 	for node in root.iter('FileVersion'):
 		if first_run:
-			latest_date = datetime.datetime.strptime(node.get('Created').split(".")[0], "%Y-%m-%dT%H:%M:%S") 
+			latest_date = datetime.datetime.strptime(node.get('Created').split(".")[0], "%Y-%m-%dT%H:%M:%S")
 		else:
-			new_date = datetime.datetime.strptime(node.get('Created').split(".")[0], "%Y-%m-%dT%H:%M:%S") 
+			new_date = datetime.datetime.strptime(node.get('Created').split(".")[0], "%Y-%m-%dT%H:%M:%S")
 			if new_date > latest_date:
 				latest_date = new_date
 		first_run = False
